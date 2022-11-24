@@ -41,7 +41,7 @@ public class Customer {
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "customer", cascade = CascadeType.ALL)
     private Set<Customer_address> customerAdress;
 
-    // One client can have many purchasesF
+    // One client can have many purchases
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "customer", cascade = CascadeType.ALL)
     private Set<Purchase> purchase;
 
