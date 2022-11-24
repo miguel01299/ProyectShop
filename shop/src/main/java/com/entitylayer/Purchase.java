@@ -34,10 +34,10 @@ public class Purchase
         @JoinColumn(name = "Customer ID")
         private Customer customer;
 
-         //Foreign key customer adress
-         @ManyToOne(cascade= CascadeType.ALL)
-         @JoinColumn(name = "Customer's Adress ID")
-         private Customer_address customer_adress;
+        //Foreign key customer address
+        @ManyToOne(cascade= CascadeType.ALL)
+        @JoinColumn(name = "Customer's Adress ID")
+        private Customer_address customer_adress;
 
          
          public Purchase()
