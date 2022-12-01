@@ -40,7 +40,7 @@ public class Customer_address
         private String flooranddoor;
     
         //One address can have many purchases attached
-        @OneToMany(fetch = FetchType.EAGER,mappedBy="customer_adress_id",cascade = CascadeType.ALL)
+        @OneToMany(fetch = FetchType.EAGER,mappedBy="customer_address_id",cascade = CascadeType.ALL)
         private Set<Purchase> purchase;
         
         //Foreign key customer

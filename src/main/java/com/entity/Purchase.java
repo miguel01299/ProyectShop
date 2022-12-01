@@ -33,11 +33,12 @@ public class Purchase
         @ManyToOne(cascade= CascadeType.ALL)
         @JoinColumn(name = "customer_id")
         private Customer customer_id;
+        
 
         //Foreign key customer address
         @ManyToOne(cascade= CascadeType.ALL)
-        @JoinColumn(name = "customer_adress_id")
-        private Customer_address customer_adress_id;
+        @JoinColumn(name = "customer_address_id")
+        private Customer_address customer_address_id;
 
          
          public Purchase()
@@ -47,13 +48,13 @@ public class Purchase
 
 
 		public Purchase(int id, String status, Set<Product> product, Customer customer_id,
-				Customer_address customer_adress_id) {
+				Customer_address customer_address_id) {
 			super();
 			this.id = id;
 			this.status = status;
 			this.product = product;
 			this.customer_id = customer_id;
-			this.customer_adress_id = customer_adress_id;
+			this.customer_address_id = customer_address_id;
 		}
 
 
@@ -97,13 +98,13 @@ public class Purchase
 		}
 
 
-		public Customer_address getCustomer_adress_id() {
-			return customer_adress_id;
+		public Customer_address getCustomer_address_id() {
+			return customer_address_id;
 		}
 
 
-		public void setCustomer_adress_id(Customer_address customer_adress_id) {
-			this.customer_adress_id = customer_adress_id;
+		public void setCustomer_address_id(Customer_address customer_address_id) {
+			this.customer_address_id = customer_address_id;
 		}
      
     

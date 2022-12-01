@@ -39,7 +39,7 @@ public class Customer {
 
     // One client can have many address
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "customer_id", cascade = CascadeType.ALL)
-    private Set<Customer_address> customer_adress;
+    private Set<Customer_address> customer_address;
 
     // One client can have many purchases
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "customer_id", cascade = CascadeType.ALL)
@@ -55,7 +55,7 @@ public class Customer {
         
     
     public Customer(int id, String name, String surname, Date birthsday, String email, String password, String role,
-			Set<Customer_address> customer_adress, Set<Purchase> purchase, Set<Card> card) {
+			Set<Customer_address> customer_address, Set<Purchase> purchase, Set<Card> card) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -64,7 +64,7 @@ public class Customer {
 		this.email = email;
 		this.password = password;
 		this.role = role;
-		this.customer_adress = customer_adress;
+		this.customer_address = customer_address;
 		this.purchase = purchase;
 		this.card = card;
 	}
@@ -141,13 +141,13 @@ public class Customer {
 	}
 
 
-	public Set<Customer_address> getCustomer_adress() {
-		return customer_adress;
+	public Set<Customer_address> getCustomer_address() {
+		return customer_address;
 	}
 
 
-	public void setCustomer_adress(Set<Customer_address> customer_adress) {
-		this.customer_adress = customer_adress;
+	public void setCustomer_address(Set<Customer_address> customer_address) {
+		this.customer_address = customer_address;
 	}
 
 
