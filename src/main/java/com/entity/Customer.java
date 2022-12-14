@@ -1,5 +1,139 @@
 package com.entity;
 
+import java.util.Date;
+import java.util.Collection;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
+import javax.persistence.JoinColumn;
+
+@Entity
+@Table(name =  "customer", uniqueConstraints = @UniqueConstraint(columnNames = "email"))
+public class Customer {
+	
+	 @Id
+	    @GeneratedValue
+	    @Column(name = "id")
+	    private int id;
+	 
+	@Column(name = "name")
+    private String name;
+
+    @Column(name = "surname")
+    private String surname;
+
+    @Column(name = "birthsday")
+    private Date birthsday;
+
+    @Column(name = "email")
+    private String email;
+
+    @Column(name = "password")
+    private String password;
+	
+	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinTable(
+			name = "customers_roles",
+			joinColumns = @JoinColumn(
+		            name = "customer_id", referencedColumnName = "id"),
+			inverseJoinColumns = @JoinColumn(
+				            name = "role_id", referencedColumnName = "id"))
+	
+	private Collection<Role> roles;
+	
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getSurname() {
+		return surname;
+	}
+
+	public void setSurname(String surname) {
+		this.surname = surname;
+	}
+
+	public Date getBirthsday() {
+		return birthsday;
+	}
+
+	public void setBirthsday(Date birthsday) {
+		this.birthsday = birthsday;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public Collection<Role> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(Collection<Role> roles) {
+		this.roles = roles;
+	}
+
+	public Customer(int id, String name, String surname, Date birthsday, String email, String password,
+			Collection<Role> roles) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.surname = surname;
+		this.birthsday = birthsday;
+		this.email = email;
+		this.password = password;
+		this.roles = roles;
+	}
+
+	public Customer() {
+		super();
+	}
+	
+	
+
+}
+
+
+/*
+ * CLASS CUSTOMER BY MIGUEL
+ * 
+ * package com.entity;
+ 
+
 import java.util.Set;
 import java.util.Date;
 import javax.persistence.CascadeType;
@@ -177,4 +311,4 @@ public class Customer {
 
     }
 
-}
+}*/

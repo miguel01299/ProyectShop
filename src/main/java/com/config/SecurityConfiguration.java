@@ -12,14 +12,17 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
-import net.javaguides.springboot.service.UserService;
+import com.service.ICustomerService;
 
+
+
+@SuppressWarnings("deprecation")
 @Configuration
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 	@Autowired
-	private UserService userService;
+	private ICustomerService customerService;
 	
 	@Bean
     public BCryptPasswordEncoder passwordEncoder() {
@@ -29,7 +32,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	@Bean
     public DaoAuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider auth = new DaoAuthenticationProvider();
-        auth.setUserDetailsService(userService);
+        auth.setUserDetailsService(customerService);
         auth.setPasswordEncoder(passwordEncoder());
         return auth;
     }

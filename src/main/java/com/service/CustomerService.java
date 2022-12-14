@@ -1,16 +1,26 @@
 package com.service;
 
 import java.awt.print.Pageable;
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import com.entity.Customer;
+import com.entity.Role;
 import com.registration.CustomerRegistration;
 import com.repository.CustomerRepository;
 
 import java.util.Optional;
+import java.util.stream.Collectors;
+
 
 
 @Service
@@ -20,6 +30,13 @@ public class CustomerService implements ICustomerService{
 	@Autowired
 	private CustomerRepository customerRepo;
 	
+	@Autowired
+	private BCryptPasswordEncoder passwordEncoder;
+	
+	public CustomerService(CustomerRepository customerRepo) {
+		super();
+		this.customerRepo = customerRepo;
+	}
 	
 	@Override
 	public Customer create(Customer customer) {
@@ -70,10 +87,26 @@ public class CustomerService implements ICustomerService{
 	@Override
 	public Customer save(CustomerRegistration registration) {
 		//check
-		Customer customer= new Customer(0, registration.getName(),registration.getSurname(),registration.getBirthsday(),registration.getEmail(),registration.getPassword(), "role", null, null, null);
+		Customer customer= new Customer(0, registration.getName(),registration.getSurname(),registration.getBirthsday(),registration.getEmail(), passwordEncoder.encode(registration.getPassword()), Arrays.asList(new Role("ROLE_USER")));
 		return customerRepo.save(customer);
+		
+
+	}
+
+	@Override
+	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+		Customer customer = customerRepo.findByEmail(username);
+		if(customer == null) {
+			throw new UsernameNotFoundException("Invalid username or password.");
+		}
+		return new org.springframework.security.core.userdetails.User(customer.getEmail(), customer.getPassword(), mapRolesToAuthorities(customer.getRoles()));		
+	}
+	
+	private Collection<? extends GrantedAuthority> mapRolesToAuthorities(Collection<Role> roles){
+		return roles.stream().map(role -> new SimpleGrantedAuthority(role.getName())).collect(Collectors.toList());
+	}
 	}
 	
 	
 
-}
+
