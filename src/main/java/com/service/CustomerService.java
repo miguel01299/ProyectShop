@@ -15,11 +15,14 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import com.entity.Customer;
 import com.entity.Role;
+import com.exception.CommonException;
 import com.registration.CustomerRegistration;
 import com.repository.CustomerRepository;
 
 import java.util.Optional;
 import java.util.stream.Collectors;
+
+import javax.persistence.PersistenceException;
 
 
 
@@ -87,8 +90,12 @@ public class CustomerService implements ICustomerService{
 	@Override
 	public Customer save(CustomerRegistration registration) {
 		//check
-		Customer customer= new Customer(0, registration.getName(),registration.getSurname(),registration.getBirthsday(),registration.getEmail(), passwordEncoder.encode(registration.getPassword()), Arrays.asList(new Role("ROLE_USER")));
-		return customerRepo.save(customer);
+		try {
+			Customer customer= new Customer(0, registration.getName(),registration.getSurname(),registration.getBirthsday(),registration.getEmail(), passwordEncoder.encode(registration.getPassword()), Arrays.asList(new Role("ROLE_USER")));
+			return customerRepo.save(customer);
+		} catch (Exception e) {
+			throw new CommonException("User already registered. Try another email.", e);
+		}
 		
 
 	}

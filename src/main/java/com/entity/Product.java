@@ -1,6 +1,5 @@
 package com.entity;
 
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,48 +10,48 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="product")
+@Table(name = "product")
 public class Product {
-    @Id
-    @GeneratedValue
-    @Column(name = "id")
-    private int id;
+	@Id
+	@GeneratedValue
+	@Column(name = "id")
+	private int id;
 
-    @Column(name = "title")
-    private String title;
+	@Column(name = "title")
+	private String title;
 
-    @Column(name = "price")
-    private float price;
+	@Column(name = "price")
+	private float price;
 
-    @Column(name = "weight")
-    private float weight;
+	@Column(name = "weight")
+	private Float weight;
 
-    @Column(name = "stock")
-    private int stock;
+	@Column(name = "stock")
+	private int stock;
 
-    // Foreign key purchase
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "purchase_id")
-    private Purchase purchase_id;
+	// Foreign key purchase
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "purchase_id")
+	private Purchase purchase_id;
 
-    // Foreign key brand
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "brand_id")
-    private Brand brand_id;
+	// Foreign key brand
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "brand_id")
+	private Brand brand_id;
 
-    // Foreign key size
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "size_id")
-    private Size size_id;
-    
-    // Foreign key size
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "color_id")
-    private Color color_id;
+	// Foreign key size
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "size_id")
+	private Size size_id;
 
-    public Product() {
-        super();
-    }
+	// Foreign key size
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "color_id")
+	private Color color_id;
+
+	public Product() {
+		super();
+	}
 
 	public Product(int id, String title, float price, float weight, int stock, Purchase purchase_id, Brand brand_id,
 			Size size_id, Color color_id) {
@@ -141,5 +140,3 @@ public class Product {
 	}
 
 }
-
-

@@ -14,7 +14,6 @@ public class CustomerRegistration {
 	private String email;
 	private String password;
 
-	
 	public String getName() {
 		return name;
 	}
@@ -55,8 +54,6 @@ public class CustomerRegistration {
 		this.password = password;
 	}
 
-	
-	
 	public CustomerRegistration(String name, String surname, Date birthsday, String email, String password) {
 		super();
 		this.name = name;
