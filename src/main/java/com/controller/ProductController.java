@@ -69,12 +69,6 @@ public class ProductController {
 		return "update_product";
 	}
 
-	@GetMapping("/deleteProduct/{id}")
-	public String deleteProduct(@PathVariable(value = "id") int id) {
-		// call delete product method
-		this.productService.delete(id);
-		return "redirect:/";
-	}
 
 	@GetMapping("/page/{pageNo}")
 	public String findPaginated(@PathVariable(value = "pageNo") int pageNo, Model model) {

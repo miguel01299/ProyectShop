@@ -47,6 +47,7 @@ X
 					<td th:text="${product.stock}"></td>
 					<td>
 						<a th:href="@{/api/product/buyProduct/{id}(id=${product.id})}" class="btn btn-success">Buy</a>
+						<a th:href="@{/api/product/showFormForUpdate/{id}(id=${product.id})}" class="btn btn-info">Update</a>
 					</td>
 				</tr>
 			</tbody>
